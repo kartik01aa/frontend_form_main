@@ -1,0 +1,19 @@
+.container{
+     display: flex;
+     justify-content: space-evenly;
+     background-color: aliceblue;
+}
+.heading{
+     display: flex;
+     flex-direction: column;
+     margin-bottom: 2rem;
+     text-align: center;
+}
+.btn{
+     padding: .6rem;
+     font-size: 1.5rem;
+     background-color: rgb(107, 75, 225);
+     color: white;
+     border-radius: 1rem;
+     border: none;
+}
