@@ -23,7 +23,7 @@ export const api:any = createApi({
           }),
       }),
       logoutUser: builder.query<void, void>({
-        query: () => `/logoutUser`,
+        query: () => `/logout`,
       }),
   }),
 })
