@@ -1,15 +1,15 @@
 import React from 'react'
 import styles from '../style/header.module.css'
 import { useAppDispatch, useAppSelector } from '../store/store'
-import { useLogoutUserQuery } from '../services/api'
+import { useLazyLogoutUserQuery } from '../services/api'
 import { logout } from '../store/reducers/login'
 
 const Header = () => {
      const user = useAppSelector(state => state.user)
      const storeDispatch = useAppDispatch()
-     const {logoutUser} = useLogoutUserQuery()
+     const [logoutUser] = useLazyLogoutUserQuery()
      const handleLogout = async()=>{
-          const returnData = await logoutUser
+          const returnData = await logoutUser()
           console.log(returnData);
           localStorage.removeItem("user")
           storeDispatch(logout())    

@@ -29,4 +29,4 @@ export const api:any = createApi({
 })
 
 
-export const { usePostRegisterDataMutation, usePostLoginDataMutation, useLogoutUserQuery} = api
+export const { usePostRegisterDataMutation, usePostLoginDataMutation, useLazyLogoutUserQuery} = api
