@@ -11,7 +11,7 @@ const Header = () => {
      const handleLogout = async()=>{
           const returnData = await logoutUser()
           console.log(returnData);
-          localStorage.removeItem("user")
+          localStorage.removeItem("userLogged")
           storeDispatch(logout())    
      }
 

@@ -11,13 +11,6 @@ import { createSlice,PayloadAction } from "@reduxjs/toolkit";
      name: 'user',
      initialState,
      reducers: {
-          // registerUser:(state, action: PayloadAction<counter>) =>{
-          //   state.userStatus = 'registered';
-          //   state.name = action.payload.name;
-          //   state.email = action.payload.email;
-          //   state.password = action.payload.password;
-          //   return state;
-          //   },
           login:(state, action: PayloadAction<counter>) =>{
             state.userStatus = 'logged-in';
             state.name = action.payload.name;

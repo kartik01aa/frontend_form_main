@@ -26,7 +26,7 @@ export default function Register() {
 
   const storeDispatch = useAppDispatch()
   const temp = useAppSelector(state=>state.user)
-  const [registerUsers] = usePostRegisterDataMutation()
+  const [registerUsers,{data, isSuccess}] = usePostRegisterDataMutation()
   const navigate = useNavigate()
  
   const {
@@ -36,19 +36,19 @@ export default function Register() {
   } = useForm<IFormInput>({ resolver: yupResolver(schema) });
 
   const onSubmit = async(data: IFormInput) => {
-      const userData:counter = { 
-        userStatus:"registered",
-        name:data.name,
-        email:data.email,
-        password:data.password
-      }
-      if(userData.name){
-        const data = await registerUsers(userData).unwrap();
-        console.log(data)
+      
+      if(data.name){
+        await registerUsers(data).unwrap();
         navigate('/login')
       } 
+      else{
+        console.log("Data.name is undefined")
+      }
       
   };
+  useEffect(()=>{
+    console.log(data)
+  },[isSuccess])
 
   return (
     <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>

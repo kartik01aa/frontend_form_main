@@ -6,6 +6,7 @@ import { login } from "../store/reducers/login";
 import { usePostLoginDataMutation } from "../services/api";
 import { useAppDispatch } from "../store/store";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 interface IFormInput {
   email: string
@@ -29,34 +30,32 @@ export default function Login() {
   } = useForm<IFormInput>({ resolver: yupResolver(schema) });
   const storeDispatch = useAppDispatch()
   const navigate = useNavigate()
-  const [loginUser,{data, isError, isLoading}] =  usePostLoginDataMutation()
+  const [postLoginData,{data,isSuccess}] =  usePostLoginDataMutation()
 
   const onSubmit = async(data: IFormInput) => {
-    const userData:counter = { 
-      userStatus:"logged-in",
-      name :"",
-      email:data.email,
-      password:data.password
-    }
-    storeDispatch(login(userData))
+  
     if(data.email){
-      const returndata = await loginUser(userData).unwrap();
-      console.log(returndata)
+      console.log(data)
+      await postLoginData(data).unwrap();
+      navigate('/')
+    }
+    else{
+      console.log("Data.email is undefined.")
+    }
+  };
+  useEffect(()=>{
+    if(isSuccess){
       const uData:counter = { 
         userStatus:"logged-in",
-        name :returndata.username,
+        name :data.username,
         email:data.email,
         password:data.password
       }
       storeDispatch(login(uData))
       localStorage.setItem('userLogged',JSON.stringify(uData))
-      navigate('/')
-    } 
-};
-
-
-
-
+    }
+  },[isSuccess])
+ 
   return (
     <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
       <label className={styles.lable}>Email</label>
